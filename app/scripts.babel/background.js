@@ -188,6 +188,7 @@ const prevAdvice = () => {
     }
   }
 
+  decrementIndex();
   showAdvice();
 };
 
@@ -199,15 +200,34 @@ const nextAdvice = () => {
     }
   }
 
+  incrementIndex();
   showAdvice();
 };
 
 
 
-chrome.alarms.create('advice',{ when: Date.now(), periodInMinutes: daily});
+chrome.alarms.create('advice',{ when: Date.now(), periodInMinutes: .5});
 
 chrome.alarms.onAlarm.addListener(function(a) {
   nextAdvice();
+  console.log(index);
+  let opt = {
+    type: 'basic',
+    iconUrl: chrome.extension.getURL('../images/dale.jpg'),
+    title: 'Dale Carnegie says',
+    message: advice[index].tagline,
+    isClickable: true
+  };
+
+  chrome.notifications.create('', opt, function() {
+    if (chrome.runtime.lastError) {
+        console.log(chrome.runtime.lastError.message);
+        console.log('something got fucked');
+    } else {
+        // Tab exists
+        showAdvice();
+    }
+  });
 });
 
 chrome.runtime.onInstalled.addListener(function (details) {
@@ -215,4 +235,3 @@ chrome.runtime.onInstalled.addListener(function (details) {
 });
 
 // chrome.browserAction.setBadgeText({ text: '\'Allo' });
-console.log('\'Allo \'Allo! Event Page for Browser Action');

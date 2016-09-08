@@ -14,30 +14,44 @@ html, body {
     padding: 0;
 }
 
+h1 {
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+h4 {
+  font-family: 'Roboto', sans-serif;
+  font-style: italic;
+}
+
+p {
+  font-family: 'Roboto', sans-serif;
+}
+
 a {
+  cursor: pointer;
   outline: none;
   text-decoration: none;
+}
 
-  &::-moz-focus-inner {
-    border: 0;
-  }
+a::-moz-focus-inner {
+  border: 0;
+}
 
-  &:focus {
-    outline: none;
-  }
+a:focus {
+  outline: none;
 }
 
 button {
 	border: none;
 	background-color: white;
+}
 
-  &::-moz-focus-inner {
-    border: 0;
-  }
+button::-moz-focus-inner {
+  border: 0;
+}
 
-  &:focus {
-    outline: none;
-  }
+button:focus {
+  outline: none;
 }
 
 header,
@@ -51,5 +65,5 @@ header {
 }
 
 main {
-  padding-bottom: 2rem;
+  padding-bottom: 3.5rem;
 }
