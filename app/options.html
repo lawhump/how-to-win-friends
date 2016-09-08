@@ -10,7 +10,59 @@
     <!-- endbuild -->
   </head>
   <body>
-    <h1>'Allo, 'Allo!</h1>
+    <header>
+      <h6><a href="popup.html">back</a></h6>
+    </header>
+
+    <main>
+      <h1>Options</h1>
+
+      <div class="left">
+        <h4>Frequency</h4>
+        <p>Receive new advice</p>
+        <input type="radio" name="daily" value="" checked disabled="true">
+        <label for="daily">Daily</label>
+        <br>
+        <input type="radio" name="everyOther" value="" disabled="true">
+        <label for="everyOther">Every Other Day</label>
+        <br>
+        <input type="radio" name="weekly" value="" disabled="true">
+        <label for="weekly">Every 7 Days</label>
+        <br>
+        <input type="radio" name="monthly" value="" disabled="true">
+        <label for="monthly">Every 30 Days</label>
+        <br>
+        <h4>Notifications</h4>
+        <input type="radio" name="enabled" value="">
+        <label for="enabled">Enabled</label>
+        <br>
+        <input type="radio" name="disbled" value=""checked>
+        <label for="disabled">Disabled</label>
+      </div>
+
+      <div class="right">
+        <h4>Section</h4>
+        <p>I want advice from</p>
+        <input type="checkbox" name="" value="" checked>
+        <label for="">All sections</label>
+        <br>
+        <input type="checkbox" name="" value="">
+        <label for="">Fundamental Techniques in Handling People</label>
+        <br>
+        <input type="checkbox" name="" value="">
+        <label for="">Six Ways to Make People Like You</label>
+        <br>
+        <input type="checkbox" name="" value="">
+        <label for="">Twelve Ways to Win People to Your Way of Thinking</label>
+        <br>
+        <input type="checkbox" name="" value="">
+        <label for="">Be a Leader: How to Change People Without Giving Offense or Arousing Resentment</label>
+      </div>
+
+      <br>
+      <!-- TODO Make save update state -->
+      <button>Save</button>
+    </main>
 
     <!-- build:js scripts/options-vendor.js -->
     <!-- bower:js -->
@@ -18,6 +70,7 @@
     <!-- endbuild -->
 
     <!-- build:js scripts/options.js -->
+    <script src="scripts/background.js"></script>
     <script src="scripts/options.js"></script>
     <!-- endbuild -->
   </body>

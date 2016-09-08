@@ -67,3 +67,22 @@ header {
 main {
   padding-bottom: 3.5rem;
 }
+
+input[disabled="true"]:hover {
+  cursor: not-allowed;
+}
+
+.left,
+.right {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.left {
+  margin-right: 4%;
+  width: 30%;
+}
+
+.right {
+  width: 65%;
+}

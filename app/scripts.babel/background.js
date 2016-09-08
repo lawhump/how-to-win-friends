@@ -7,6 +7,7 @@ const everyOtherDay = 4320;
 const weekly = 10080;
 const monthly = 43200;
 
+
 const $ = (query) => {
   var res = document.querySelectorAll(query);
 
@@ -16,6 +17,24 @@ const $ = (query) => {
 
   return res;
 };
+
+let interval = (() => {
+  if ($('.left input[name="daily"]').checked) {
+    return daily;
+  }
+
+  else if ($('.left input[name="everyOther"]').checked) {
+    return everyOtherDay;
+  }
+
+  else if ($('.left input[name="weekly"]').checked) {
+    return weekly;
+  }
+
+  else {
+    return monthly;
+  }
+})();
 
 const advice = [
                {
@@ -180,55 +199,54 @@ const showAdvice = () => {
   $more.innerText = advice[index].more;
 };
 
-const prevAdvice = () => {
-  let decrementIndex = () => {
-    index--;
-    if (index < 0) {
-      index = advice.length-1;
-    }
+const decrementIndex = () => {
+  index--;
+  if (index < 0) {
+    index = advice.length-1;
   }
+};
 
+const incrementIndex = () => {
+  index++;
+  if (index == advice.length) {
+    index = 0;
+  }
+};
+
+const prevAdvice = () => {
   decrementIndex();
   showAdvice();
 };
 
 const nextAdvice = () => {
-  let incrementIndex = () => {
-    index++;
-    if (index == advice.length) {
-      index = 0;
-    }
-  }
-
   incrementIndex();
   showAdvice();
 };
 
 
 
-chrome.alarms.create('advice',{ when: Date.now(), periodInMinutes: .5});
+// chrome.alarms.create('advice',{ when: Date.now(), periodInMinutes: interval});
 
-chrome.alarms.onAlarm.addListener(function(a) {
-  nextAdvice();
-  console.log(index);
-  let opt = {
-    type: 'basic',
-    iconUrl: chrome.extension.getURL('../images/dale.jpg'),
-    title: 'Dale Carnegie says',
-    message: advice[index].tagline,
-    isClickable: true
-  };
-
-  chrome.notifications.create('', opt, function() {
-    if (chrome.runtime.lastError) {
-        console.log(chrome.runtime.lastError.message);
-        console.log('something got fucked');
-    } else {
-        // Tab exists
-        showAdvice();
-    }
-  });
-});
+// chrome.alarms.onAlarm.addListener(function(a) {
+//   incrementIndex();
+//   let opt = {
+//     type: 'basic',
+//     iconUrl: chrome.extension.getURL('../images/dale.jpg'),
+//     title: 'Dale Carnegie says',
+//     message: advice[index].tagline,
+//     isClickable: true
+//   };
+//
+//   chrome.notifications.create('', opt, () => {
+//     if (chrome.runtime.lastError) {
+//         console.log(chrome.runtime.lastError.message);
+//         console.log('something got fucked');
+//     } else {
+//         // Tab exists
+//         showAdvice();
+//     }
+//   });
+// });
 
 chrome.runtime.onInstalled.addListener(function (details) {
   console.log('previousVersion', details.previousVersion);
